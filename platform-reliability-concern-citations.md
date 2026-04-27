@@ -7,7 +7,7 @@
 | Seligman & Maier (1967) — learned helplessness | [1967](https://doi.org/10.1037/h0024514) · [2016](https://pmc.ncbi.nlm.nih.gov/articles/PMC4920136/) | Clinical definition of learned helplessness | "animals learned that outcomes were independent of their responses—that nothing they did mattered—and that this learning undermined trying to escape" | ✓ Validated. |
 | Pangrazio (2025, BJET) — platformized school | [source](https://bera-journals.onlinelibrary.wiley.com/doi/10.1111/bjet.70014) | Vendor-controlled data infrastructures create institutional dependency on platform providers | Infrastructural dependence on platform providers | ✓ Validated. Student continuity clause replaced with first-person observation. |
 
-<div style="page-break-before: always;"></div>
+---
 
 | Citation | Source | Supported claim | What to find | Status |
 |---|---|---|---|---|
