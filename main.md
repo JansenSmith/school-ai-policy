@@ -8,12 +8,19 @@ Document Gemini platform reliability findings, maintain the school AI policy fra
 Active. Concern letter drafted; citations fully validated. Awaiting send and supervisor response.
 
 ## Index
+
+**Git-tracked (uploaded to GitHub):**
 - `main.md` — this file; project brain
-- `CLAUDE.md` — symlink to main.md (Claude Code auto-load compatibility)
 - `_filesys.md` — NLP file system operational principles
-- `policy.md` — school AI policy: philosophy, ethical use, data sensitivity, student use, sourcing, honesty pledge
 - `platform-reliability-concern.md` — formal message to supervisor flagging Gemini's unreliability for classroom use
-- `platform-reliability-concern-citations.md` — citation validation table; export as PDF attachment
+- `platform-reliability-concern.pdf` — PDF export of concern letter
+- `platform-reliability-concern-citations.md` — citation validation table
+- `platform-reliability-concern-citations.pdf` — PDF export of citations table; email attachment
+
+**Local only (gitignored):**
+- `CLAUDE.md` — symlink to main.md (Claude Code auto-load compatibility)
+- `policy.md` — school AI policy: philosophy, ethical use, data sensitivity, student use, sourcing, honesty pledge
+- `policy.pdf` — PDF export of school policy
 - `gemini-children-harm-research.md` — citation research: does Gemini specifically harm children? Best available citations + gap analysis
 - `completed.md` — append-only log of completed work
 
