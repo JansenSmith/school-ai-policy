@@ -4,7 +4,7 @@ Guides project self-maintenance: accumulation, splitting, surfacing, task flow. 
 
 **Factory-managed. Do not edit within a project.** Changes flow from factory, pushed downstream deliberately.
 
-**Filesys version:** `177684c`
+**Filesys version:** `6ebfb03`
 
 **@-import limitation:** loaded at session start; no mid-session refresh. Edit during session = LLM sees old version until next session. Don't edit and expect immediate effect.
 
@@ -250,10 +250,32 @@ Repo tag = bare repo directory name (e.g. `omarchy`), not full path — helps wh
 
 **Approval:** explicit typed go — "commit", "yes", "go", or equivalent.
 
+**Approval marker.** After approval, write `~/.claude/approve-commit` — 3 lines:
+
+```
+<absolute path to target repo>
+<7-char prefix of sha256 of `git diff --cached` at that path>
+<commit message, single line — must match the -m argument exactly>
+```
+
+Write snippet (run as its own Bash call, never chained with the commit):
+
+```bash
+{
+  echo "/abs/path/to/repo"
+  git -C /abs/path/to/repo diff --cached | sha256sum | cut -c1-7
+  echo "<message>"
+} > ~/.claude/approve-commit
+```
+
+Hook validates: path is a git repo, current `sha256(git diff --cached)[:7]` at that path matches line 2, and the `-m` message matches line 3. Any mismatch → deny. After commit, staged tree empties → hash drifts → marker self-invalidates, so the next commit re-runs the full propose-and-approve cycle.
+
+A stale marker from a previous session/repo causes a "staged tree changed since approval" denial — just overwrite the marker for the current proposal and retry.
+
 **Execution discipline.** A global `PreToolUse` hook may be installed at `~/.claude/settings.json` to mechanically enforce the protocol — operate as if it is, regardless:
 
 - Stage in its own Bash call.
-- Write any approval marker in its own Bash call.
+- Write the approval marker in its own Bash call (see format above).
 - Run `git commit` in its own Bash call. Never chained — the hook reads the marker before the chain runs, so `... && git commit` sees the stale marker and denies.
 - First token of every commit-bearing Bash call must be literal `git`. No `cd && git`, no env-var prefix, no subshell, no pipe.
 - Supported forms: `git commit -m "..."` (inside repo) or `git -C /path commit -m "..."` (any cwd). Heredoc, `-F <file>`, `--message=`, and multi-line messages are unsupported.
